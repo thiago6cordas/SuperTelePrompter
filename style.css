@@ -1,51 +1,55 @@
-
 body {
   font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
   margin: 0;
   padding: 0;
-  background: #111;
-  color: #fff;
 }
+
 .container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
 }
-h1 {
-  text-align: center;
-}
+
 textarea {
   width: 100%;
-  height: 120px;
-  font-size: 1rem;
-  margin-bottom: 10px;
+  height: 150px;
+  font-size: 16px;
+  padding: 10px;
 }
+
 .controls {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
-  margin-bottom: 10px;
+  align-items: center;
 }
-#teleprompter {
-  background: #000;
-  padding: 20px;
-  font-family: 'Arial Black', sans-serif;
-  font-size: 1.5rem;
-  height: 180px;
+
+button, input[type="number"] {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.teleprompter {
+  margin-top: 20px;
+  height: 200px;
   overflow: hidden;
-  line-height: 2.2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1.5em;
 }
+
 .line {
-  opacity: 0.3;
+  opacity: 0.5;
+  transition: all 0.3s ease;
 }
+
 .line.active {
-  opacity: 1;
-  font-size: 2rem;
   font-weight: bold;
-  color: yellow;
-}
-.mobile #teleprompter {
-  font-size: 1.2rem;
+  font-size: 24px;
+  opacity: 1;
 }

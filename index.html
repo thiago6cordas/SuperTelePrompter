@@ -2,187 +2,23 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SuperTelePrompter</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-
-    #controls {
-      margin-bottom: 20px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    button, input[type="number"], label {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
-      margin: 5px;
-    }
-
-    button {
-      background-color: #444;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #666;
-    }
-
-    #lyrics-container {
-      width: 90%;
-      max-width: 800px;
-      height: 200px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    #lyrics {
-      font-family: 'Arial Black', sans-serif;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s linear;
-    }
-
-    .line {
-      text-align: center;
-      font-size: 24px;
-      opacity: 0.5;
-      transition: opacity 0.3s, font-size 0.3s;
-    }
-
-    .highlight {
-      font-size: 32px;
-      font-weight: bold;
-      opacity: 1;
-      color: #0f0;
-    }
-
-    @media (max-width: 600px) {
-      .line {
-        font-size: 20px;
-      }
-
-      .highlight {
-        font-size: 26px;
-      }
-
-      #lyrics-container {
-        height: 180px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>SuperTelePrompter</h1>
-
-  <div id="controls">
-    <button onclick="start()">Iniciar</button>
-    <button onclick="nextLine()">Próximo</button>
-    <label>Velocidade (s): <input type="number" id="speed" value="0.5" step="0.1" min="0.1"></label>
-    <label><input type="checkbox" id="repeat"> Repetir música</label>
-    <button onclick="toggleMode()">Alternar modo PC/Mobile</button>
+  <div class="container">
+    <h1>SuperTelePrompter</h1>
+    <textarea id="lyricsInput" placeholder="Cole a letra da música aqui..."></textarea>
+    <div class="controls">
+      <button onclick="startScroll()">Iniciar</button>
+      <button onclick="nextLine()">Próximo</button>
+      <label for="speedInput">Velocidade (s):</label>
+      <input type="number" id="speedInput" value="0.5" step="0.1" min="0.1">
+      <label><input type="checkbox" id="repeat"> Repetir música</label>
+    </div>
+    <div class="teleprompter" id="teleprompterDisplay"></div>
   </div>
-
-  <div id="lyrics-container">
-    <div id="lyrics"></div>
-  </div>
-
-  <script>
-    const lyricsText = `Quando a luz dos olhos meus
-E a luz dos olhos teus
-Resolvem se encontrar...
-
-Ai que bom que isso é meu Deus
-Que frio que me dá
-O encontro desse olhar...
-
-Mas se a luz dos olhos teus
-Resiste aos olhos meus
-Só pra me provocar...
-
-Meu amor, juro por Deus
-Me sinto incendiar...`;
-
-    let lines = lyricsText.split("\n");
-    const lyricsDiv = document.getElementById("lyrics");
-    let currentLine = 0;
-    let interval;
-    let isMobile = false;
-
-    function renderLyrics() {
-      lyricsDiv.innerHTML = "";
-      for (let i = 0; i < lines.length; i++) {
-        const div = document.createElement("div");
-        div.className = "line";
-        div.textContent = lines[i];
-        lyricsDiv.appendChild(div);
-      }
-      updateHighlight();
-    }
-
-    function updateHighlight() {
-      const allLines = document.querySelectorAll(".line");
-      allLines.forEach((line, index) => {
-        line.classList.remove("highlight");
-        line.style.opacity = "0.5";
-        if (index === currentLine) {
-          line.classList.add("highlight");
-          line.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      });
-
-      const offset = (currentLine - 2) * 40;
-      lyricsDiv.style.transform = `translateY(-${offset}px)`;
-    }
-
-    function start() {
-      clearInterval(interval);
-      const speed = parseFloat(document.getElementById("speed").value) * 1000;
-      interval = setInterval(() => {
-        if (currentLine < lines.length - 1) {
-          currentLine++;
-          updateHighlight();
-        } else {
-          if (document.getElementById("repeat").checked) {
-            currentLine = 0;
-            updateHighlight();
-          } else {
-            clearInterval(interval);
-          }
-        }
-      }, speed);
-    }
-
-    function nextLine() {
-      if (currentLine < lines.length - 1) {
-        currentLine++;
-        updateHighlight();
-      }
-    }
-
-    function toggleMode() {
-      isMobile = !isMobile;
-      document.body.style.fontSize = isMobile ? "18px" : "16px";
-    }
-
-    renderLyrics();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
