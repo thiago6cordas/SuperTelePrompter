@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SuperTelePrompter</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>SuperTelePrompter</h1>
+        <textarea id="lyricsInput" placeholder="Cole ou digite a letra aqui..."></textarea>
+        <input type="file" id="pdfUpload" accept=".pdf" />
+        <div class="controls">
+            <button onclick="startScroll()">Iniciar</button>
+            <button onclick="nextLine()">Próximo</button>
+            <button onclick="toggleRepeat()">Repetir Música</button>
+            <label>Velocidade (seg): <input type="number" id="speed" value="0.5" step="0.1" min="0.1" /></label>
+            <label><input type="checkbox" id="modeToggle"> Modo Mobile</label>
+        </div>
+        <div id="lyricsBox" class="lyrics-box">
+            <div id="lyrics"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
