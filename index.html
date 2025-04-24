@@ -77,9 +77,9 @@
 <body>
   <h1>Teleprompter para Cantores</h1>
   <div id="import-container">
-    <textarea placeholder="Cole sua letra aqui..."></textarea>
+    <textarea id="lyricsInput" placeholder="Cole sua letra aqui..."></textarea>
     <br>
-    <button>Importar Letra</button>
+    <button id="importButton">Importar Letra</button>
   </div>
   <div id="scroll-container">
     <div class="line">Linha 1</div>
@@ -88,5 +88,39 @@
     <div class="line">Linha 4</div>
     <div class="line">Linha 5</div>
   </div>
+  
+  <script>
+    // Função para importar e processar a letra
+    document.getElementById("importButton").addEventListener("click", () => {
+      // Obtenha o texto do textarea
+      const lyrics = document.getElementById("lyricsInput").value.trim();
+
+      // Verifica se o texto está vazio
+      if (!lyrics) {
+        alert("Por favor, cole uma letra para importar!");
+        return;
+      }
+
+      // Divida o texto em linhas usando quebra de linha "\n"
+      const lines = lyrics.split("\n");
+
+      // Obtenha o container de rolagem
+      const scrollContainer = document.getElementById("scroll-container");
+
+      // Limpe o conteúdo existente no scrollContainer
+      scrollContainer.innerHTML = "";
+
+      // Adicione as linhas no container com destaque para a linha central
+      lines.forEach((line, index) => {
+        const div = document.createElement("div");
+        div.className = "line";
+        if (index === 2) { // Destaca a terceira linha como padrão
+          div.classList.add("highlight");
+        }
+        div.textContent = line;
+        scrollContainer.appendChild(div);
+      });
+    });
+  </script>
 </body>
 </html>
