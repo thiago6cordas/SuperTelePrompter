@@ -1,24 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SuperTelePrompter</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teleprompter para Cantores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #import-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    textarea {
+      width: 90%;
+      max-width: 600px;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+    #scroll-container {
+      width: 90%;
+      max-width: 600px;
+      height: 200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .line {
+      text-align: center;
+      font-size: 18px;
+      color: #666;
+      margin: 5px 0;
+    }
+    .line.highlight {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>SuperTelePrompter</h1>
-    <textarea id="lyricsInput" placeholder="Cole a letra da música aqui..."></textarea>
-    <div class="controls">
-      <button onclick="startScroll()">Iniciar</button>
-      <button onclick="nextLine()">Próximo</button>
-      <label for="speedInput">Velocidade (s):</label>
-      <input type="number" id="speedInput" value="0.5" step="0.1" min="0.1">
-      <label><input type="checkbox" id="repeat"> Repetir música</label>
-    </div>
-    <div class="teleprompter" id="teleprompterDisplay"></div>
+  <h1>Teleprompter para Cantores</h1>
+  <div id="import-container">
+    <textarea placeholder="Cole sua letra aqui..."></textarea>
+    <br>
+    <button>Importar Letra</button>
   </div>
-  <script src="script.js"></script>
+  <div id="scroll-container">
+    <div class="line">Linha 1</div>
+    <div class="line">Linha 2</div>
+    <div class="line highlight">Linha Central (Destacada)</div>
+    <div class="line">Linha 4</div>
+    <div class="line">Linha 5</div>
+  </div>
 </body>
 </html>
